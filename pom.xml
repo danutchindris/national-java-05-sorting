@@ -10,34 +10,53 @@ atributele sunt perechi de tip nume=valoare
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-    <!-- un element XML poate contine text -->
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- groupId este namespace-ul organizatiei noastre -->
     <groupId>ro.siit</groupId>
-    <!-- artifactId este numele artefactului pe care il vom impacheta cand vrem sa livram aplicatia -->
     <artifactId>sorting</artifactId>
-    <!-- version este versiunea curenta a artefactului;
-    cand este o versiune de development se obisnuieste sa se puna sufixul -SNAPSHOT -->
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <!-- proprietati standard, cunoscute de catre pluginul de compilare al Maven-ului,
-        care ii spune ce versiune a compilatorului de Java sa foloseasca -->
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <!-- aici vom putea adauga si proprietatile definite de noi, atunci cand avem nevoie -->
     </properties>
 
-    <!-- lista de dependente pe care vrem sa le folosim in proiect -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>5.7.1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <dependencies>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>ro.siit.Application</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
 <!-- tag de sfarsit al documentului XML -->
